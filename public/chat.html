@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="connectToServer()">连接到服务器</button>
+    <button onClick="sendMessage()">发送消息</button>
+  </body>
+  <script>
+    var wx = null
+
+    function connectToServer() {
+      // 打开一个 web socket
+      ws = new WebSocket('ws://localhost:8081')
+
+      ws.onopen = function() {
+        console.log('---我已经连接到服务器端了---')
+      }
+
+      ws.onmessage = function(evt) {
+        var received_msg = evt.data
+        console.log(received_msg)
+      }
+    }
+
+    function sendMessage() {
+      ws.send('你好')
+    }
+  </script>
+</html>
